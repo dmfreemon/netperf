@@ -2341,12 +2341,12 @@ bind_to_specific_processor(int use_cpu_affinity, int use_cpu_map)
 
 #if defined(__CPU_SETSIZE)
 #define NETPERF_CPU_SETSIZE __CPU_SETSIZE
-#if defined(__CPU_SET_S)
-#define NETPERF_CPU_SET(cpu, cpusetp)  __CPU_SET_S(cpu, sizeof (cpu_set_t), cpusetp)
-#define NETPERF_CPU_ZERO(cpusetp)      __CPU_ZERO_S (sizeof (cpu_set_t), cpusetp)
+#if defined(CPU_SET_S)
+#define NETPERF_CPU_SET(cpu, cpusetp)  CPU_SET_S(cpu, sizeof (cpu_set_t), cpusetp)
+#define NETPERF_CPU_ZERO(cpusetp)      CPU_ZERO_S (sizeof (cpu_set_t), cpusetp)
 #else
-#define NETPERF_CPU_SET(cpu, cpusetp)  __CPU_SET(cpu, cpusetp)
-#define NETPERF_CPU_ZERO(cpusetp)      __CPU_ZERO (cpusetp)
+#define NETPERF_CPU_SET(cpu, cpusetp)  CPU_SET(cpu, cpusetp)
+#define NETPERF_CPU_ZERO(cpusetp)      CPU_ZERO (cpusetp)
 #endif
   typedef cpu_set_t netperf_cpu_set_t;
 #else
