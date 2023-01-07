@@ -188,7 +188,7 @@ static HIST time_hist;
 
 
 #ifdef WANT_INTERVALS
-int interval_count;
+extern int interval_count;
 unsigned int interval_wait_microseconds;
 
 /* hoist the timestamps up here so we can use them to factor-out the
@@ -230,7 +230,7 @@ static struct timeval *temp_intvl_ptr = &intvl_one;
     interval_count = interval_burst; \
     interval_wait_microseconds = 0;
 #else
-sigset_t signal_set;
+extern sigset_t signal_set;
 #define INTERVALS_INIT() \
     if (interval_burst) { \
       /* zero means that we never pause, so we never should need the \
@@ -484,14 +484,6 @@ static int client_port_min = 5000;
 static int client_port_max = 65535;
 
  /* different options for the sockets				*/
-
-int
-  loc_nodelay,		/* don't/do use NODELAY	locally		*/
-  rem_nodelay,		/* don't/do use NODELAY remotely	*/
-  loc_sndavoid,		/* avoid send copies locally		*/
-  loc_rcvavoid,		/* avoid recv copies locally		*/
-  rem_sndavoid,		/* avoid send copies remotely		*/
-  rem_rcvavoid; 	/* avoid recv_copies remotely		*/
 
 extern int
   loc_tcpcork,
