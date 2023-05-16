@@ -3674,6 +3674,11 @@ set_transport_cong_control(SOCKET socket, int protocol, char cong_control[], int
 {
 #ifdef TCP_CONGESTION
   if (protocol == IPPROTO_TCP) {
+    if (debug) {
+      fprintf(where,"calling set_transport_cong_control with (%s)\n",
+	      cong_control);
+      fflush(where);
+    }
     /* if it fails, we'll pick that up via the subsequent "get" */
     setsockopt(socket, protocol, TCP_CONGESTION, cong_control, len);
   }
@@ -5193,6 +5198,11 @@ recv_omni()
   strncpy(local_cong_control_req,
 	  omni_request->cong_control,
 	  sizeof(local_cong_control_req));
+
+  if (debug) {
+    fprintf(where, "recv_omni received cong_control value of (%s)\n", local_cong_control_req);
+    fflush(where);
+  }
 
   /* based on what we have been told by the remote netperf, we want to
      setup our endpoint for the "data connection" and let the remote
